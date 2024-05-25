@@ -59,7 +59,7 @@ exports.updateStudent = async (req, res) => {
     // Log the actual error for debugging purposes
     console.error('Error updating student:', error);
     // If an error occurs, return a server error response
-    res.status(500).json({ error: 'An error occurred' });
+    res.status(500).json({ error: 'An error occured' + error.message });
   }
 };
 
