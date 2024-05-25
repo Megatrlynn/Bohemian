@@ -36,7 +36,7 @@ exports.getStudentById = async (req, res) => {
 
 exports.updateStudent = async (req, res) => {
   try {
-    const student = await Student.findByPk(req.params.id);
+    const student = await Student.findByPk(req.params.regNo);
     if (student) {
       await student.update(req.body);
       res.json({ message: 'Student updated successfully' });
