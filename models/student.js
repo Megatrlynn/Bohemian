@@ -4,40 +4,40 @@ const sequelize = require('../config/database'); // Adjust the path to your data
 const Student = sequelize.define('Student', {
   name: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
   },
   username: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
   },
   regNo: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
     unique: true
   },
   dob: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
   },
   university: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
   },
   role: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
   },
   gender: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
   },
   studentType: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
   }
 });
 
