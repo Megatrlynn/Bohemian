@@ -16,7 +16,8 @@ exports.getStudents = async (req, res) => {
     const students = await Student.findAll();
     res.json(students);
   } catch (error) {
-    res.status(500).json({ error: 'An error occurred' });
+    console.error('Error fetching students:', error); // Log the detailed error
+    res.status(500).json({ error: 'An error occurred while fetching students', details: error.message });
   }
 };
 
