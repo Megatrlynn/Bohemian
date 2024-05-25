@@ -21,22 +21,33 @@ exports.getStudents = async (req, res) => {
   }
 };
 
-exports.getStudentById = async (req, res) => {
+exports.updateStudent = async (req, res) => {
   try {
-    const student = await Student.findByPk(req.params.id);
-    if (student) {
-      res.json(student);
+    const { regNo } = req.params;
+    const updatedStudent = req.body;
+
+    // Find the student by regNo and update its data
+    const [updatedRowCount] = await Student.update(updatedStudent, {
+      where: { regNo: regNo }
+    });
+
+    // Check if any rows were updated
+    if (updatedRowCount > 0) {
+      // If at least one row was updated, return success message
+      res.json({ success: true, message: 'Student updated successfully' });
     } else {
+      // If no rows were updated, return a not found error
       res.status(404).json({ error: 'Student not found' });
     }
   } catch (error) {
+    // If an error occurs, return a server error response
     res.status(500).json({ error: 'An error occurred' });
   }
 };
 
 exports.updateStudent = async (req, res) => {
   try {
-    const student = await Student.findByPk(req.params.regNo);
+    const student = await Student.findByPk(req.params.id);
     if (student) {
       await student.update(req.body);
       res.json({ message: 'Student updated successfully' });
