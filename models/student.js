@@ -16,7 +16,7 @@ const Student = sequelize.define('Student', {
     unique: true
   },
   dob: {
-    type: DataTypes.DATE,
+    type: DataTypes.STRING,
     allowNull: false
   },
   password: {
