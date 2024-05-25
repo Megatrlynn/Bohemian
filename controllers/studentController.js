@@ -54,7 +54,7 @@ exports.updateStudent = async (req, res) => {
     }
   } catch (error) {
     // If an error occurs, return a server error response
-    res.status(500).json({ error: 'Turbodiesel' });
+    res.status(500).json({ error: 'An error occured' });
   }
 };
 
