@@ -2,10 +2,11 @@ const Student = require('../models/student');
 
 exports.createStudent = async (req, res) => {
   try {
+    console.log('Request Body:', req.body); // Log the request body to debug
     const student = await Student.create(req.body);
     res.status(201).json({ message: 'Student created successfully' });
   } catch (error) {
-    console.error('Error creating student:', error);
+    console.error('Error creating student:', error); // Log the actual error
     res.status(500).json({ error: 'An error occurred', details: error.message });
   }
 };
