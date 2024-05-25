@@ -12,12 +12,12 @@ const Student = sequelize.define('Student', {
   },
   regNo: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
     unique: true
   },
   dob: {
     type: DataTypes.DATE,
-    allowNull: false
+    allowNull: true
   },
   password: {
     type: DataTypes.STRING,
@@ -37,7 +37,7 @@ const Student = sequelize.define('Student', {
   },
   studentType: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   }
 });
 
