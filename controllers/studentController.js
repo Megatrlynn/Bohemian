@@ -37,10 +37,13 @@ exports.getStudentById = async (req, res) => {
 exports.updateStudent = async (req, res) => {
   try {
     const { regNo } = req.params;
-    const updatedStudentData = req.body; // Ensure updatedStudentData is properly received
+    const updatedStudent = req.body;
+
+    console.log('Received update request for regNo:', regNo);
+    console.log('Updated student data:', updatedStudent);
 
     // Find the student by regNo and update its data
-    const [updatedRowCount] = await Student.update(updatedStudentData, {
+    const [updatedRowCount] = await Student.update(updatedStudent, {
       where: { regNo: regNo }
     });
 
@@ -53,8 +56,10 @@ exports.updateStudent = async (req, res) => {
       res.status(404).json({ error: 'Student not found' });
     }
   } catch (error) {
+    // Log the actual error for debugging purposes
+    console.error('Error updating student:', error);
     // If an error occurs, return a server error response
-    res.status(500).json({ error: 'An error occured' });
+    res.status(500).json({ error: 'An error occurred' });
   }
 };
 
