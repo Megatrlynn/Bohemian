@@ -36,11 +36,17 @@ exports.getStudentById = async (req, res) => {
 
 exports.updateStudent = async (req, res) => {
   try {
-    // Attempt to update the student record
+    const { regNo } = req.params;
+    const updatedStudent = req.body;
+
+    console.log('Received update request for regNo:', regNo);
+    console.log('Updated student data:', updatedStudent);
+
+    // Find the student by regNo and update its data
     const [updatedRowCount] = await Student.update(updatedStudent, {
       where: { regNo: regNo }
     });
-  
+
     // Check if any rows were updated
     if (updatedRowCount > 0) {
       // If at least one row was updated, return success message
@@ -50,16 +56,10 @@ exports.updateStudent = async (req, res) => {
       res.status(404).json({ error: 'Student not found' });
     }
   } catch (error) {
-    // If a validation error occurs, return details about the validation errors
-    if (error.name === 'SequelizeValidationError') {
-      const validationErrors = error.errors.map(err => {
-        return { field: err.path, message: err.message };
-      });
-      res.status(400).json({ error: 'Validation error', details: validationErrors });
-    } else {
-      // If an unexpected error occurs, return a server error response
-      res.status(500).json({ error: 'An error occurred' });
-    }
+    // Log the actual error for debugging purposes
+    console.error('Error updating student:', error);
+    // If an error occurs, return a server error response
+    res.status(500).json({ error: 'An error occured' + error.message });
   }
 };
 
