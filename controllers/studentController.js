@@ -37,10 +37,10 @@ exports.getStudentById = async (req, res) => {
 exports.updateStudent = async (req, res) => {
   try {
     const { regNo } = req.params;
-    const updatedStudent = req.body;
+    const updatedStudentData = req.body; // Ensure updatedStudentData is properly received
 
     // Find the student by regNo and update its data
-    const [updatedRowCount] = await Student.update(updatedStudent, {
+    const [updatedRowCount] = await Student.update(updatedStudentData, {
       where: { regNo: regNo }
     });
 
@@ -57,7 +57,6 @@ exports.updateStudent = async (req, res) => {
     res.status(500).json({ error: 'An error occurred' });
   }
 };
-
 
 exports.deleteStudent = async (req, res) => {
   try {
