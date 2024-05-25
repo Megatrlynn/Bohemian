@@ -21,6 +21,19 @@ exports.getStudents = async (req, res) => {
   }
 };
 
+exports.getStudentById = async (req, res) => {
+  try {
+    const student = await Student.findByPk(req.params.id);
+    if (student) {
+      res.json(student);
+    } else {
+      res.status(404).json({ error: 'Student not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred' });
+  }
+};
+
 exports.updateStudent = async (req, res) => {
   try {
     const { regNo } = req.params;
@@ -45,19 +58,6 @@ exports.updateStudent = async (req, res) => {
   }
 };
 
-exports.updateStudent = async (req, res) => {
-  try {
-    const student = await Student.findByPk(req.params.id);
-    if (student) {
-      await student.update(req.body);
-      res.json({ message: 'Student updated successfully' });
-    } else {
-      res.status(404).json({ error: 'Student not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: 'An error occurred' });
-  }
-};
 
 exports.deleteStudent = async (req, res) => {
   try {
