@@ -5,7 +5,8 @@ exports.createStudent = async (req, res) => {
     const student = await Student.create(req.body);
     res.status(201).json({ message: 'Student created successfully' });
   } catch (error) {
-    res.status(500).json({ error: 'An error occurred' });
+    console.error('Error creating student:', error); // Log the actual error
+    res.status(500).json({ error: 'An error occurred', details: error.message });
   }
 };
 
