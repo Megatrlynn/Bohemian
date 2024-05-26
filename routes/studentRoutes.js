@@ -11,7 +11,7 @@ router.post('/students', studentController.createStudent);
 router.get('/students', studentController.getStudents);
 router.get('/students/:id', studentController.getStudentById);
 router.put('/students/:regNo', studentController.updateStudent);
+router.patch('/students/:regNo', studentController.patchStudent);
 router.delete('/students/:id', studentController.deleteStudent);
 
 module.exports = router;
-

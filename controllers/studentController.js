@@ -30,7 +30,7 @@ exports.getStudentById = async (req, res) => {
       res.status(404).json({ error: 'Student not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'An error occurred' });
+    res.status(500).json({ error: 'An error occurred', details: error.message });
   }
 };
 
@@ -59,7 +59,36 @@ exports.updateStudent = async (req, res) => {
     // Log the actual error for debugging purposes
     console.error('Error updating student:', error);
     // If an error occurs, return a server error response
-    res.status(500).json({ error: 'An error occured' + error.message });
+    res.status(500).json({ error: 'An error occurred', details: error.message });
+  }
+};
+
+exports.patchStudent = async (req, res) => {
+  try {
+    const { regNo } = req.params;
+    const updatedFields = req.body;
+
+    console.log('Received patch request for regNo:', regNo);
+    console.log('Updated student data:', updatedFields);
+
+    // Find the student by regNo and update its data
+    const [updatedRowCount] = await Student.update(updatedFields, {
+      where: { regNo: regNo }
+    });
+
+    // Check if any rows were updated
+    if (updatedRowCount > 0) {
+      // If at least one row was updated, return success message
+      res.json({ success: true, message: 'Student updated successfully' });
+    } else {
+      // If no rows were updated, return a not found error
+      res.status(404).json({ error: 'Student not found' });
+    }
+  } catch (error) {
+    // Log the actual error for debugging purposes
+    console.error('Error updating student:', error);
+    // If an error occurs, return a server error response
+    res.status(500).json({ error: 'An error occurred', details: error.message });
   }
 };
 
@@ -73,6 +102,6 @@ exports.deleteStudent = async (req, res) => {
       res.status(404).json({ error: 'Student not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'An error occurred' });
+    res.status(500).json({ error: 'An error occurred', details: error.message });
   }
 };
